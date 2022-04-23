@@ -1,2 +1,3 @@
 # RS_ML_mod
-machine learning mod about RS
+机器学习模型在遥感图像分类中的应用
+还没有做精度分析
