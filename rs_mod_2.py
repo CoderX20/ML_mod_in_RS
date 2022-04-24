@@ -28,8 +28,8 @@ def test_mod(mod_path=r"",test_dataset=[]):
                 false_count+=1
     
     Accuracy=(true_count+false_count)/(dataset_true_count+dataset_false_count)
-    Precision=true_count/dataset_true_count
-    Recall=true_count/count_1
+    Precision=true_count/count_1
+    Recall=true_count/dataset_true_count
     F1=0
     if (Precision+Recall)!=0:
         F1=2*(Precision*Recall)/(Precision+Recall)
