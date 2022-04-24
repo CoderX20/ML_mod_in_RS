@@ -52,18 +52,21 @@ def get_tif_bands(tif_file=r""):
 if __name__=="__main__":
     water_tif_list=get_dir_file_names(dir_name=r"D:/杂物/RS/train data/水体/")
     other_tif_list=get_dir_file_names(dir_name=r"D:/杂物/RS/train data/非水体/")
+    water_data_vec=[]
     for i in water_tif_list:
-        water_data_vec=get_tif_bands(r"D:/杂物/RS/train data/水体/"+i)
-    # print("water data shape:"+str(np.array(water_data_vec).shape))
+        water_data_vec+=get_tif_bands(r"D:/杂物/RS/train data/水体/"+i)
+    print("water data shape:"+str(np.array(water_data_vec).shape))
+    other_data_vec=[]
     for i in other_tif_list:
-        other_data_vec=get_tif_bands(r"D:/杂物/RS/train data/非水体/"+i)
-    # print("other data shape:"+str(np.array(other_data_vec).shape))
+        other_data_vec+=get_tif_bands(r"D:/杂物/RS/train data/非水体/"+i)
+    print("other data shape:"+str(np.array(other_data_vec).shape))
     x=np.array(water_data_vec+other_data_vec)
     y=np.concatenate((np.ones(len(water_data_vec)),np.zeros(len(other_data_vec))))
     X_train,X_test,Y_train,Y_test=train_test_split(x,y,test_size=0.3,random_state=3)
-
+    print("train shape"+str(X_train.shape))
     rs_mod=SVC(kernel="rbf",C=0.8)
     rs_mod.fit(X_train,Y_train)
+    print("mod train over")
     print(rs_mod.score(X_test,Y_test))
 
     with open('./train mod/RS_SVM-1.pickle','wb') as file_pickle:
