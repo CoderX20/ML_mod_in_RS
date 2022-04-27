@@ -43,6 +43,20 @@ def make_water_population(water_data_list=[],people_data_list=[],year=[]):
     plot.show()
 
 
+def make_water_plot(water_data_list=[],year=[]):
+    """
+    制作水体覆盖率折线图
+    """
+    fig,ax=plot.subplots()
+    ax.grid()
+    ax.set_title("Water coverage 2013-2019")
+    ax.plot(year,water_data_list,c="red",label="Water coverage")
+    ax.scatter(year,water_data_list,s=50,c="red")
+    ax.set_ylabel("Water coverage")
+    plot.legend()
+    plot.show()
+
+
 if __name__=="__main__":
     water_cover_path="D:/杂物/RS/Script/result.json"
     gdp_path="D:/杂物/RS/Script/Wuhan GDP.json"
@@ -63,7 +77,9 @@ if __name__=="__main__":
         water_data_list.append(water_json_data[0][i])
     
     # make_water_population(water_data_list=water_data_list,people_data_list=people_data_list,year=year)
-    data=pd.DataFrame({"Water coverage":water_data_list,"Population":people_data_list,"GDP":gdp_data_list})
-    print(data.corr())
+    # data=pd.DataFrame({"Water coverage":water_data_list,"Population":people_data_list,"GDP":gdp_data_list})
+    # print(data.corr())
+
+    make_water_plot(water_data_list=water_data_list,year=year)
     
     
